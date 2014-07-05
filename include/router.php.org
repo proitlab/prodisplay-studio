@@ -1,0 +1,67 @@
+<?php
+	//echo $_GET['title'];
+	if((isset($_GET['type'])) && (isset($_GET['title'])) && (isset($_GET['assetname']))
+		&& (isset($_GET['index'])) && (isset($_GET['x'])) && (isset($_GET['y']))
+		&& (isset($_GET['w'])) && (isset($_GET['h'])))
+	{
+	   $title = $_GET['title'];
+	   $assetname = $_GET['assetname'];
+	   $index = $_GET['index'];
+	   $x = $_GET['x'];
+	   $y = $_GET['y'];
+	   $w = $_GET['w'];
+	   $h = $_GET['h'];
+	   switch($_GET['type']) {
+		case 'Video':
+			header("Location: video.php?title=".$title
+				."&assetname=".$assetname
+				."&index=".$index
+				."&x=".$x
+				."&y=".$y
+				."&w=".$w
+				."&h=".$h
+			);
+		break;
+		case 'SlideShow':
+			header("Location: slideshow.php?title=".$title
+				."&assetname=".$assetname
+				."&index=".$index
+				."&x=".$x
+				."&y=".$y
+				."&w=".$w
+				."&h=".$h
+			);
+		break;
+		case 'RunningText':
+			header("Location: runningtext.php?title=".$title
+				."&assetname=".$assetname
+				."&index=".$index
+				."&x=".$x
+				."&y=".$y
+				."&w=".$w
+				."&h=".$h
+			);
+		break;
+		case 'Logo':
+			header("Location: logo.php?title=".$title
+				."&assetname=".$assetname
+				."&index=".$index
+				."&x=".$x
+				."&y=".$y
+				."&w=".$w
+				."&h=".$h
+			);
+		break;
+		default:
+			header("Location: common.php?title=".$title
+				."&assetname=".$assetname
+				."&index=".$index
+				."&x=".$x
+				."&y=".$y
+				."&w=".$w
+				."&h=".$h
+			);
+		break;
+	   }
+	}
+?>

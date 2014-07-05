@@ -1,0 +1,18 @@
+#!/bin/bash
+# node2array.ds
+# Last Modified: 20140704
+# Input: $1 -> node.lua file
+
+WORKDIR=`dirname $1`
+TEMPFILE=${WORKDIR}/tempfile.$$
+TEMPFILE2=${WORKDIR}/tempfile2.$$
+DESTFILE=${WORKDIR}/node.lua.array
+
+# Remove white line
+sed -e 's/^ *//g' -e 's/ *$//' -e '/--/d' $1 > $TEMPFILE
+grep "gl.setup" $TEMPFILE | sed 's/gl.setup/canvas/g' > $TEMPFILE2
+grep "resource.render_child" $TEMPFILE | sed -e 's/resource.render_child(\"//g' -e 's/\"):draw//g' >> $TEMPFILE2
+
+mv $TEMPFILE2 $DESTFILE
+rm -fr $TEMPFILE
+echo $DESTFILE

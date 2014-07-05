@@ -1,0 +1,25 @@
+#!/bin/bash
+
+FEEDINPUT=$1
+WORKDIR=`dirname $1`
+FEEDINPUT=${WORKDIR}/feed.input
+NODELUA=${WORKDIR}/node.lua
+TEMPFILE=${WORKDIR}/temp.file.$$
+
+if [ ! -s $FEEDINPUT ]; then
+	echo "No Text" > $FEEDINPUT
+	exit 0;
+fi
+
+#echo $WORKDIR
+#echo $NODELUA
+#echo $TEMPFILE
+
+head -7 ${NODELUA}.org  > $TEMPFILE
+awk 'BEGIN {printf("    feed_text = {");} {printf("\"%s\",",$0);} END {printf("}\n");}' $FEEDINPUT >> $TEMPFILE
+#awk 'BEGIN {printf("    feed_text = {");} {printf("\"%s\",",$0);} END {printf("\"proit.co.id\"}");}' $FEEDINPUT >> $TEMPFILE
+tail -16 ${NODELUA}.org >> $TEMPFILE
+
+cat $TEMPFILE
+
+mv $TEMPFILE $NODELUA
